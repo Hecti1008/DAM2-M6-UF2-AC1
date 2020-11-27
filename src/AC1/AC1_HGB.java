@@ -6,9 +6,13 @@ package AC1;
  * and open the template in the editor.
  */
 
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Scanner;
 /**
  *
- * @author megah
+ * @author Hector Garzon
  */
 public class AC1_HGB {
 
