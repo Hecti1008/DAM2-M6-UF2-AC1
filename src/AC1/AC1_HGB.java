@@ -13,6 +13,10 @@ import java.util.Scanner;
 
 import java.sql.Statement;
 import java.sql.Connection;
+import java.sql.*;
+import com.mysql.jdbc.Connection;
+import com.mysql.jdbc.Statement;
+
 
 /**
  *
