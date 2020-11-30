@@ -17,7 +17,7 @@ import java.sql.*;
 
 import javax.swing.JOptionPane;
 
-import com.mysql.jdbc.Driver;
+import com.mysql.cj.jdbc.Driver;
 
 
 
