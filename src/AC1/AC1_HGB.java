@@ -14,8 +14,11 @@ import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.sql.Connection;
 import java.sql.*;
+
 import javax.swing.JOptionPane;
-import com.mysql.cj.jdbc.Driver;
+
+import com.mysql.jdbc.Driver;
+
 
 
 /**
@@ -23,27 +26,25 @@ import com.mysql.cj.jdbc.Driver;
  * @author Hector Garzon
  */
 public class AC1_HGB {
-    public static final String URL = "jbdc:mysql://localhost:3306/AC1_UF2_M6";
-    public static final String USERNAME = "root";
-    public static final String PASSWORD = "";
     
-    public static void main(String[] args) {
-        
-        Connection connection = null;
-            connection = connection();
-    }
     
-    public static Connection connection(){
-        Connection connection = null;
+    public static void main(String[]args) throws SQLException{
+        Connection conn = null;
         
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
-            JOptionPane.showMessageDialog(null, "Conexio establerta");
-        } catch  (Exception e) {
-            System.out.println("e");
+        try{
+            Class.forName("com.mysql.jdbc.Driver");
+            conn = (Connection) DriverManager.getConnection(
+                    "jdbc:mysql://localhost:3306/AC1_UF2_M6", "root","");
+        } catch (Exception e) {
+            System.out.println(e);
         }
-        return connection;
+        
     }
+   
+   }
     
-}
+   
+        
+
+    
+
