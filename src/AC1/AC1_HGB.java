@@ -60,8 +60,15 @@ public class AC1_HGB {
 	System.out.println("Introdueix poblacio");
 	String poblacio = scan.next();
         
-        Statement statement = conn.createStatement();
-        statement.executeUpdate("INSERT INTO alumnes ");
+        try{
+            Statement statement = conn.createStatement();
+            statement.executeUpdate("INSERT INTO alumnes ");
+        } catch (Exception err) {
+            System.err.println("Error en la introduccio");
+            System.err.println(err);
+                   
+        }
+        
         
     }
    }
