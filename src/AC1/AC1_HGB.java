@@ -60,9 +60,10 @@ public class AC1_HGB {
 	System.out.println("Introdueix poblacio");
 	String poblacio = scan.next();
         
+        Statement statement = conn.createStatement();
+        statement.executeUpdate("INSERT INTO alumnes ");
         
     }
-   
    }
     
    
