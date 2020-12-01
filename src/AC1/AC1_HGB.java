@@ -27,17 +27,22 @@ import com.mysql.cj.jdbc.Driver;
  */
 public class AC1_HGB {
     
+    static Scanner scan = new Scanner(System.in);
     
     public static void main(String[]args) throws SQLException{
+        
         Connection conn = null;
         
         try{
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
             conn = (Connection) DriverManager.getConnection(
-                    "jdbc:mysql://localhost:3306/AC1_UF2_M6", "root","");
+                    "jdbc:mysql://localhost:3306/ac1_uf2_m6", "root","");
         } catch (Exception e) {
-            System.out.println(e);
+            System.out.println(e.getMessage());
         }
+        
+        int opcio;
+        
         
     }
    
