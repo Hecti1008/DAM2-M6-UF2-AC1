@@ -56,28 +56,38 @@ public class AC1_HGB {
         int id;
         boolean programa = true
         
+        while (program){
+            menu();
+            opcio = scan.nextInt()
+                    
+                    switch(opcio){
+                        case 1:
+                            
+                        System.out.println("Introdueix el nom de l'alumne");
+                         String nom = scan.next();
+                        System.out.println("Introdueix el DNI");
+                        String DNI = scan.next();
+                        System.out.println("Introdueix la data de naixement (en String)");
+                        String fecha = scan.next();
+                        System.out.println("Introdueix la adreça");
+                        String adreça = scan.next();
+                        System.out.println("Introdueix el codi postal");
+                        int codiPostal = scan.nextInt();
+                        System.out.println("Introdueix poblacio");
+                        String poblacio = scan.next();
         
-        System.out.println("Introdueix el nom de l'alumne");
-        String nom = scan.next();
-	System.out.println("Introdueix el DNI");
-	String DNI = scan.next();
-	System.out.println("Introdueix la data de naixement (en String)");
-	String fecha = scan.next();
-	System.out.println("Introdueix la adreça");
-	String adreça = scan.next();
-	System.out.println("Introdueix el codi postal");
-	int codiPostal = scan.nextInt();
-	System.out.println("Introdueix poblacio");
-	String poblacio = scan.next();
-        
-        try{
-            Statement statement = conn.createStatement();
-            statement.executeUpdate("INSERT INTO alumnes");
-        } catch (Exception err) {
-            System.err.println("Error en la introduccio");
-            System.err.println(err);
+                      try{
+                        Statement statement = conn.createStatement();
+                       statement.executeUpdate("INSERT INTO alumnes");
+                     } catch (Exception err) {
+                         System.err.println("Error en la introduccio");
+                         System.err.println(err);
                    
-        }
+                         }
+                     }
+                    }
+        
+        
         
         
     }
