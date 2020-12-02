@@ -29,6 +29,15 @@ public class AC1_HGB {
     
     static Scanner scan = new Scanner(System.in);
     
+    public static void menu(){
+        System.out.println("Tria una opcio");
+        System.out.println("1. Inserir registre");
+        System.out.println("2. Modificar registre");
+        System.out.println("3. Eliminar registre");
+        System.out.println("4. Ensenyar registres");
+        System.out.println("5. Sortir");
+    }
+    
     public static void main(String[]args) throws SQLException{
         
         Connection conn = null;
@@ -45,6 +54,7 @@ public class AC1_HGB {
         boolean programa;
         boolean valor;
         int id;
+        boolean programa = true
         
         
         System.out.println("Introdueix el nom de l'alumne");
@@ -62,7 +72,7 @@ public class AC1_HGB {
         
         try{
             Statement statement = conn.createStatement();
-            statement.executeUpdate("INSERT INTO alumnes ");
+            statement.executeUpdate("INSERT INTO alumnes");
         } catch (Exception err) {
             System.err.println("Error en la introduccio");
             System.err.println(err);
