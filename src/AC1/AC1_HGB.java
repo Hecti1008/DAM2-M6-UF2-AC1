@@ -1,5 +1,5 @@
 package AC1;
-
+// http://localhost:8080/phpmyadmin/
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -56,9 +56,9 @@ public class AC1_HGB {
         int id;
         boolean programa = true
         
-        while (program){
+        while (programa){
             menu();
-            opcio = scan.nextInt()
+            opcio = scan.nextInt();
                     
                     switch(opcio){
                         case 1:
@@ -78,7 +78,7 @@ public class AC1_HGB {
         
                       try{
                         Statement statement = conn.createStatement();
-                       statement.executeUpdate("INSERT INTO alumnes");
+                       statement.execute("INSERT INTO alumnes ()");
                      } catch (Exception err) {
                          System.err.println("Error en la introduccio");
                          System.err.println(err);
