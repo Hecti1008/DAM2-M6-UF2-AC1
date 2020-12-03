@@ -118,6 +118,9 @@ public class Inserir extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        InserirAlumnes inserirAlumnes = new InserirAlumnes();
+        inserirAlumnes.setVisible(true);
+        dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -129,7 +132,7 @@ public class Inserir extends javax.swing.JFrame {
         // TODO add your handling code here:
         Menu menu = new Menu();
         menu.setVisible(true);
-        dispouse();
+        dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
