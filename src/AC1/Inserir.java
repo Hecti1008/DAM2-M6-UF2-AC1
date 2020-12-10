@@ -49,6 +49,11 @@ public class Inserir extends javax.swing.JFrame {
         jLabel1.setText("Inserir");
 
         jButton2.setText("Poblacio");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Tornar");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -134,6 +139,13 @@ public class Inserir extends javax.swing.JFrame {
         menu.setVisible(true);
         dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        InserirPoblacio inserirPoblacio = new InserirPoblacio();
+        inserirPoblacio.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments

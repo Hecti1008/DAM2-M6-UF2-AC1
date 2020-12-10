@@ -57,7 +57,7 @@ public class InserirAlumnes extends javax.swing.JFrame {
 
         jLabel4.setText("Data naiexement");
 
-        jLabel5.setText("Adrreça");
+        jLabel5.setText("Adreça");
 
         jLabel6.setText("Sexe");
 

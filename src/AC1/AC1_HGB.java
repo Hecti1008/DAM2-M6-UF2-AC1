@@ -54,9 +54,9 @@ public class AC1_HGB {
         boolean programa;
         boolean valor;
         int id;
-        boolean programa = true
+        //boolean programa = true
         
-        while (programa){
+       // while (programa){
             menu();
             opcio = scan.nextInt();
                     
@@ -91,7 +91,6 @@ public class AC1_HGB {
         
         
     }
-   }
     
    
         
