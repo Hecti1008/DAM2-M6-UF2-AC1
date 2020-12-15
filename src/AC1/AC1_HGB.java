@@ -54,6 +54,7 @@ public class AC1_HGB {
         boolean programa;
         boolean valor;
         int id;
+        Statement stmt;
         //boolean programa = true
         
        // while (programa){
@@ -68,29 +69,40 @@ public class AC1_HGB {
                         System.out.println("Introdueix el DNI");
                         String DNI = scan.next();
                         System.out.println("Introdueix la data de naixement (en String)");
-                        String fecha = scan.next();
+                        String dataNaixement = scan.next();
                         System.out.println("Introdueix la adreça");
                         String adreça = scan.next();
-                        System.out.println("Introdueix el codi postal");
+                        System.out.println("Introdueix el sexe");
+                        String sexe  = scan.next();
+                        System.out.println("Introdueix codiPostal");
                         int codiPostal = scan.nextInt();
-                        System.out.println("Introdueix poblacio");
-                        String poblacio = scan.next();
         
-                      try{
-                        Statement statement = conn.createStatement();
-                       statement.execute("INSERT INTO alumnes ()");
-                     } catch (Exception err) {
-                         System.err.println("Error en la introduccio");
-                         System.err.println(err);
-                   
-                         }
-                     }
+                      stmt = (Statement) conn.createStatement();
+                    stmt.executeUpdate("INSERT INTO alumne(nom, DNI, dataNaixement, adreça, sexe, codiPostal)"
+                            + "VALUES ('" 
+                            + nom
+                            + "', '"
+                            + DNI
+                            + "', '"
+                            + dataNaixement
+                            + "', '"
+                            + adreça
+                            + "', '"
+                            + sexe
+                            + "', '"
+                            + codiPostal
+                            + "')");
+                    
+                    System.out.println("alumne introduit");
+                    
+                    break;
                     }
         
         
         
         
     }
+}
     
    
         
