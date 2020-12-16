@@ -54,6 +54,7 @@ public class AC1_HGB {
         boolean programa;
         boolean valor;
         int id;
+        ResultSet resSet;
         Statement stmt;
         //boolean programa = true
         
@@ -96,10 +97,20 @@ public class AC1_HGB {
                     System.out.println("alumne introduit");
                     
                     break;
-                            
+                           //modificar Alumnes 
                         case 2:
                             
-                          System.out.println();
+                          System.out.println("Introdueix el DNI de l'alumne a modificar");
+                            DNI = scan.next();
+                            boolean modificar = true;
+                            //triem el dni per buscar l'alumne
+                            stmt = (Statement) conn.createStatement();
+                            resSet = stmt.executeQuery("SELECT * FROM alumne WHERE DNI = '" + DNI + "'");
+                            
+                            System.out.println("Nom---DNI---DataNaixement---Adreça---Sexe---CodiPostal");
+                            while (resSet.next())
+                                System.out.println(resSet.getString(1) + resSet.getString(2) + );
+                            
                     }
         
         
