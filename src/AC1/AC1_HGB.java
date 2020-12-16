@@ -56,7 +56,6 @@ public class AC1_HGB {
         int id;
         ResultSet resSet;
         Statement stmt;
-        //boolean programa = true
         
             menu();
             opcio = scan.nextInt();
@@ -68,31 +67,31 @@ public class AC1_HGB {
                         System.out.println("Introdueix el nom de l'alumne");
                          String nom = scan.next();
                         System.out.println("Introdueix el DNI");
-                        String DNI = scan.next();
+                        String dni = scan.next();
                         System.out.println("Introdueix la data de naixement (en String)");
-                        String dataNaixement = scan.next();
+                        String datanaixement = scan.next();
                         System.out.println("Introdueix la adreça");
                         String adreça = scan.next();
                         System.out.println("Introdueix el sexe");
                         String sexe  = scan.next();
                         System.out.println("Introdueix codiPostal");
-                        int codiPostal = scan.nextInt();
+                        int codipostal = scan.nextInt();
                         
                         //fem els inserts a la base de dades
                       stmt = (Statement) conn.createStatement();
-                    stmt.executeUpdate("INSERT INTO alumne(nom, DNI, dataNaixement, adreça, sexe, codiPostal)"
+                    stmt.executeUpdate("INSERT INTO alumne(nom, dni, datanaixement, adreça, sexe, codipostal)"
                             + "VALUES ('" 
                             + nom
                             + "', '"
-                            + DNI
+                            + dni
                             + "', '"
-                            + dataNaixement
+                            + datanaixement
                             + "', '"
                             + adreça
                             + "', '"
                             + sexe
                             + "', '"
-                            + codiPostal
+                            + codipostal
                             + "')");
                     
                     System.out.println("alumne introduit");
@@ -102,13 +101,13 @@ public class AC1_HGB {
                         case 2:
                             
                           System.out.println("Introdueix el DNI de l'alumne a modificar");
-                            DNI = scan.next();
+                            dni = scan.next();
                             boolean modificar = true;
                             //triem el dni per buscar l'alumne
                             stmt = (Statement) conn.createStatement();
-                            resSet = stmt.executeQuery("SELECT * FROM alumne WHERE DNI = '" + DNI + "'");
+                            resSet = stmt.executeQuery("SELECT * FROM alumne WHERE dni = '" + dni + "'");
                             
-                            System.out.println("Nom---DNI---DataNaixement---Adreça---Sexe---CodiPostal");
+                            System.out.println("Nom---DNI---Data Naixement---Adreça---Sexe---Codi Postal");
                             while (resSet.next())
                                 System.out.println(resSet.getString(1) + " " + resSet.getString(2)+ " " + 
                                         resSet.getString(3) + " " + resSet.getString(4) + " " + 
@@ -116,7 +115,8 @@ public class AC1_HGB {
                             
                             //seleccionem el camp a modificar
                             System.out.println("Escriu el camp a modificar: ");
-                            System.out.println("Nom---DNI---DataNaixement---Adreça---Sexe---CodiPostal");
+                            System.out.println("Nom---DNI---Data Naixement---Adreça---Sexe---Codi Postal");
+                            String campM = scan.next().toLowerCase();
                             
                     }
         
