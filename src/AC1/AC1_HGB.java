@@ -96,6 +96,10 @@ public class AC1_HGB {
                     System.out.println("alumne introduit");
                     
                     break;
+                            
+                        case 2:
+                            
+                          System.out.println();
                     }
         
         
