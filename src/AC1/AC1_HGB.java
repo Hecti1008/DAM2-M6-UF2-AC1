@@ -39,7 +39,7 @@ public class AC1_HGB {
     }
     
     public static void main(String[]args) throws SQLException{
-        
+        //conexio a la bdoo
         Connection conn = null;
         
         try{
@@ -58,11 +58,11 @@ public class AC1_HGB {
         Statement stmt;
         //boolean programa = true
         
-       // while (programa){
             menu();
             opcio = scan.nextInt();
                     
                     switch(opcio){
+                        //inserim els alumnes per teclat
                         case 1:
                             
                         System.out.println("Introdueix el nom de l'alumne");
@@ -77,7 +77,8 @@ public class AC1_HGB {
                         String sexe  = scan.next();
                         System.out.println("Introdueix codiPostal");
                         int codiPostal = scan.nextInt();
-        
+                        
+                        //fem els inserts a la base de dades
                       stmt = (Statement) conn.createStatement();
                     stmt.executeUpdate("INSERT INTO alumne(nom, DNI, dataNaixement, adreça, sexe, codiPostal)"
                             + "VALUES ('" 
