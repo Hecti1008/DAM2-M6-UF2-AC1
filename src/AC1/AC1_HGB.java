@@ -110,7 +110,13 @@ public class AC1_HGB {
                             
                             System.out.println("Nom---DNI---DataNaixement---Adreça---Sexe---CodiPostal");
                             while (resSet.next())
-                                System.out.println(resSet.getString(1) + resSet.getString(2) + );
+                                System.out.println(resSet.getString(1) + " " + resSet.getString(2)+ " " + 
+                                        resSet.getString(3) + " " + resSet.getString(4) + " " + 
+                                        resSet.getString(5) + " " + resSet.getString(6));
+                            
+                            //seleccionem el camp a modificar
+                            System.out.println("Escriu el camp a modificar: ");
+                            System.out.println("Nom---DNI---DataNaixement---Adreça---Sexe---CodiPostal");
                             
                     }
         
