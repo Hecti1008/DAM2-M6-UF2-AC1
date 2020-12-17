@@ -30,7 +30,8 @@ public class AC1_HGB {
     static Scanner scan = new Scanner(System.in);
     
     public static void menu(){
-        System.out.println("Tria una opcio");
+        System.out.println("Tria una opcio, per poder introduir un alumne"
+                + " has d'introduir una poblacio amb un codipostal.");
         System.out.println("1. Inserir registre");
         System.out.println("2. Modificar registre");
         System.out.println("3. Eliminar registre");
@@ -65,7 +66,7 @@ public class AC1_HGB {
                         case 1:
                             
                         System.out.println("Introdueix el nom de l'alumne");
-                         String nom = scan.next();
+                        String nom = scan.next();
                         System.out.println("Introdueix el DNI");
                         String dni = scan.next();
                         System.out.println("Introdueix la data de naixement (en String)");
