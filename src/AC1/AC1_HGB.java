@@ -81,7 +81,7 @@ public class AC1_HGB {
                         
                         //fem els inserts a la base de dades
                       stmt = (Statement) conn.createStatement();
-                    stmt.executeUpdate("INSERT INTO alumne(nom, dni, datanaixement, adreça, sexe, codipostal, poblacio)"
+                    stmt.executeUpdate("INSERT INTO alumnes(nom, dni, datanaixement, adreça, sexe, codipostal, poblacio)"
                             + "VALUES ('" 
                             + nom
                             + "', '"
@@ -109,7 +109,7 @@ public class AC1_HGB {
                             boolean modificar = true;
                             //triem el dni per buscar l'alumne
                             stmt = (Statement) conn.createStatement();
-                            resSet = stmt.executeQuery("SELECT * FROM alumne WHERE dni = '" + dni + "'");
+                            resSet = stmt.executeQuery("SELECT * FROM alumnes WHERE dni = '" + dni + "'");
                             
                             valor =resSet.next();
                             
@@ -118,7 +118,7 @@ public class AC1_HGB {
                                 System.out.println("L'alumne introduit no existeix");
                             }else{
                                 while (modificar) {
-                                    resSet = stmt.executeQuery("SELECT * FROM alumne WHERE dni = '" + dni + "'");
+                                    resSet = stmt.executeQuery("SELECT * FROM alumnes WHERE dni = '" + dni + "'");
                                 
                             System.out.println("Nom---DNI---Data Naixement---Adreça---Sexe---Codi Postal---Poblacio");
                             while (resSet.next())
@@ -128,19 +128,19 @@ public class AC1_HGB {
                             
                             //seleccionem el camp a modificar
                             System.out.println("Escriu el camp a modificar: ");
-                            System.out.println("Nom---DNI---Data Naixement---Adreça---Sexe---Codi Postal");
+                            System.out.println("Nom---DNI---Data Naixement---Adreça---Sexe---Codi Postal---Poblacio");
                             String campM = scan.next().toLowerCase();
                             System.out.println("Introdueix el nou camp");
                             
                             if (campM.equals("campo")) {
-                                int codiPostalUpdate = scan.nextInt();
-                                stmt.executeUpdate("UPDATE alumne set " + campM + 
-                                        "= '" + valor + "'WHERE DNI = '" + 
+                                int poblacioUpdate = scan.nextInt();
+                                stmt.executeUpdate("UPDATE alumnes set " + campM + 
+                                        "= '" + valor + "'WHERE dni = '" + 
                                         dni + "'");
                             }else{
                                 String valor2 = scan.next();
-                                stmt.executeUpdate("UPDATE alumne set " + campM + 
-                                        "= '" + valor + "'WHERE DNI = '" + 
+                                stmt.executeUpdate("UPDATE alumnes set " + campM + 
+                                        "= '" + valor + "'WHERE dni = '" + 
                                         dni + "'");
                             }
                             
@@ -164,7 +164,7 @@ public class AC1_HGB {
                     
                     stmt = (Statement) conn.createStatement();
                     
-                    resSet = stmt.executeQuery("SELECT * FROM alumne WHERE dni = '" + dni
+                    resSet = stmt.executeQuery("SELECT * FROM alumnes WHERE dni = '" + dni
                                     + "'");
                     valor = resSet.next();
                     
@@ -172,7 +172,7 @@ public class AC1_HGB {
                         System.out.println("Alumne no existeix");
                     }else{
                         stmt = (Statement) conn.createStatement();
-                        stmt.executeUpdate("DELETE FROM alumne WHERE dni = '" + dni
+                        stmt.executeUpdate("DELETE FROM alumnes WHERE dni = '" + dni
                                         + "'");
                         
                         System.out.println("Alumne eliminat correctament");
@@ -185,7 +185,7 @@ public class AC1_HGB {
                         case 4:
                             
                             stmt = (Statement) conn.createStatement();
-                            resSet = stmt.executeQuery("SELECT * FROM alumne");
+                            resSet = stmt.executeQuery("SELECT * FROM alumnes");
                             System.out.println("Nom---DNI---Data Naixement---Adreça---Sexe---Codi Postal");
                             while (resSet.next())
                                 
