@@ -111,7 +111,7 @@ public class AC1_HGB {
                             
                             //si falla l'alunme
                             if (valor == false) {
-                                System.out.println("L¡alumne introduit no existeix");
+                                System.out.println("L'alumne introduit no existeix");
                             }else{
                                 while (modificar) {
                                     resSet = stmt.executeQuery("SELECT * FROM alumne WHERE dni = '" + dni + "'");
@@ -120,7 +120,7 @@ public class AC1_HGB {
                             while (resSet.next())
                                 System.out.println(resSet.getString(1) + " " + resSet.getString(2)+ " " + 
                                         resSet.getString(3) + " " + resSet.getString(4) + " " + 
-                                        resSet.getString(5) + " " + resSet.getString(6));
+                                        resSet.getString(5) + " " + resSet.getInt(6));
                             
                             //seleccionem el camp a modificar
                             System.out.println("Escriu el camp a modificar: ");
@@ -128,13 +128,78 @@ public class AC1_HGB {
                             String campM = scan.next().toLowerCase();
                             System.out.println("Introdueix el nou camp");
                             
-                                }       
+                            if (campM.equals("campo")) {
+                                int codiPostalUpdate = scan.nextInt();
+                                stmt.executeUpdate("UPDATE alumne set " + campM + 
+                                        "= '" + valor + "'WHERE DNI = '" + 
+                                        dni + "'");
+                            }else{
+                                String valor2 = scan.next();
+                                stmt.executeUpdate("UPDATE alumne set " + campM + 
+                                        "= '" + valor + "'WHERE DNI = '" + 
+                                        dni + "'");
+                            }
+                            
+                                    System.out.println("Vols modificar mes camps?");
+                                    System.out.println("Si o no?");
+                                    String altraM = scan.next();
+                                    if (altraM.equalsIgnoreCase("no")) {
+                                        modificar = false;
+                                    }
+                            
+                            }       
                     }
-        
-        
-        
-        
-    }
+                        break;
+                            
+                            //eliminar alumne
+                            
+                        case 3:
+                            
+                            System.out.println("Introdueix el DNI del alumne que vols eliminar");
+                    dni = scan.next();
+                    
+                    stmt = (Statement) conn.createStatement();
+                    
+                    resSet = stmt.executeQuery("SELECT * FROM alumne WHERE dni = '" + dni
+                                    + "'");
+                    valor = resSet.next();
+                    
+                    if (valor == false) {
+                        System.out.println("Alumne no existeix");
+                    }else{
+                        stmt = (Statement) conn.createStatement();
+                        stmt.executeUpdate("DELETE FROM alumne WHERE dni = '" + dni
+                                        + "'");
+                        
+                        System.out.println("Alumne eliminat correctament");
+                    }
+                    
+                    break;
+                            
+                    //ensenyar l'alumne
+                            
+                        case 4:
+                            
+                            stmt = (Statement) conn.createStatement();
+                            resSet = stmt.executeQuery("SELECT * FROM alumne");
+                            System.out.println("Nom---DNI---Data Naixement---Adreça---Sexe---Codi Postal");
+                            while (resSet.next())
+                                
+                                System.out.println(resSet.getString(1) + " " + resSet.getString(2)+ " " + 
+                                        resSet.getString(3) + " " + resSet.getString(4) + " " + 
+                                        resSet.getString(5) + " " + resSet.getInt(6));
+                            break;
+                            
+                    //sortir del programa i tancar la conexio
+                        case 5:
+                            System.out.println("Conexio tancada");
+                            conn.close();
+                            programa = false;
+                            
+                        default:
+                            break;
+                    }
+}
 }
     
    
