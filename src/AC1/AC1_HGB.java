@@ -107,6 +107,15 @@ public class AC1_HGB {
                             stmt = (Statement) conn.createStatement();
                             resSet = stmt.executeQuery("SELECT * FROM alumne WHERE dni = '" + dni + "'");
                             
+                            valor =resSet.next();
+                            
+                            //si falla l'alunme
+                            if (valor == false) {
+                                System.out.println("L¡alumne introduit no existeix");
+                            }else{
+                                while (modificar) {
+                                    resSet = stmt.executeQuery("SELECT * FROM alumne WHERE dni = '" + dni + "'");
+                                
                             System.out.println("Nom---DNI---Data Naixement---Adreça---Sexe---Codi Postal");
                             while (resSet.next())
                                 System.out.println(resSet.getString(1) + " " + resSet.getString(2)+ " " + 
@@ -117,7 +126,9 @@ public class AC1_HGB {
                             System.out.println("Escriu el camp a modificar: ");
                             System.out.println("Nom---DNI---Data Naixement---Adreça---Sexe---Codi Postal");
                             String campM = scan.next().toLowerCase();
+                            System.out.println("Introdueix el nou camp");
                             
+                                }       
                     }
         
         
