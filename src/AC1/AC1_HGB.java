@@ -52,7 +52,6 @@ public class AC1_HGB {
         }
         
         int opcio;
-        boolean programa;
         boolean valor;
         int id;
         ResultSet resSet;
