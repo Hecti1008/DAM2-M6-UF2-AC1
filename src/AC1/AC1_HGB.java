@@ -76,12 +76,11 @@ public class AC1_HGB {
                         String sexe  = scan.next();
                         System.out.println("Introdueix codiPostal");
                         int codipostal = scan.nextInt();
-                        System.out.println("Introdueix poblacio");
-                        String poblacio = scan.next();
+                        
                         
                         //fem els inserts a la base de dades
                       stmt = (Statement) conn.createStatement();
-                    stmt.executeUpdate("INSERT INTO alumnes(nom, dni, datanaixement, adreça, sexe, codipostal, poblacio)"
+                    stmt.executeUpdate("INSERT INTO alumnes(nom, dni, datanaixement, adreça, sexe, codipostal)"
                             + "VALUES ('" 
                             + nom
                             + "', '"
@@ -94,8 +93,6 @@ public class AC1_HGB {
                             + sexe
                             + "', '"
                             + codipostal
-                            + "', '"
-                            + poblacio
                             + "')");
                     
                     System.out.println("alumne introduit");
@@ -120,20 +117,20 @@ public class AC1_HGB {
                                 while (modificar) {
                                     resSet = stmt.executeQuery("SELECT * FROM alumnes WHERE dni = '" + dni + "'");
                                 
-                            System.out.println("Nom---DNI---Data Naixement---Adreça---Sexe---Codi Postal---Poblacio");
+                            System.out.println("Nom---DNI---Data Naixement---Adreça---Sexe---Codi Postal");
                             while (resSet.next())
                                 System.out.println(resSet.getString(1) + " " + resSet.getString(2)+ " " + 
                                         resSet.getString(3) + " " + resSet.getString(4) + " " + 
-                                        resSet.getString(5) + " " + resSet.getInt(6) + " " + resSet.getString(7));
+                                        resSet.getString(5) + " " + resSet.getInt(6));
                             
                             //seleccionem el camp a modificar
                             System.out.println("Escriu el camp a modificar: ");
-                            System.out.println("Nom---DNI---Data Naixement---Adreça---Sexe---Codi Postal---Poblacio");
+                            System.out.println("Nom---DNI---Data Naixement---Adreça---Sexe---Codi Postal");
                             String campM = scan.next().toLowerCase();
                             System.out.println("Introdueix el nou camp");
                             
                             if (campM.equals("campo")) {
-                                int poblacioUpdate = scan.nextInt();
+                                int codipostUpdate = scan.nextInt();
                                 stmt.executeUpdate("UPDATE alumnes set " + campM + 
                                         "= '" + valor + "'WHERE dni = '" + 
                                         dni + "'");
