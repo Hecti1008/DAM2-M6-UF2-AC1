@@ -26,21 +26,17 @@ import com.mysql.cj.jdbc.Driver;
  * @author Hector Garzon
  */
 public class AC1_HGB {
-    
-    static Scanner scan = new Scanner(System.in);
-    
-    public static void menu(){
-        System.out.println("Tria una opcio, per poder introduir un alumne"
-                + " has d'introduir una poblacio amb un codipostal.");
-        System.out.println("1. Inserir registre");
-        System.out.println("2. Modificar registre");
-        System.out.println("3. Eliminar registre");
-        System.out.println("4. Ensenyar registres");
-        System.out.println("5. Sortir");
-    }
-    
+   
     public static void main(String[]args) throws SQLException{
-        //conexio a la bdoo
+    
+       Scanner scan = new Scanner(System.in);
+       
+       int opcio;
+        boolean valor;
+        Statement selectStmt = null;
+        Statement stmt;
+        
+    //conexio a la bdoo
         Connection conn = null;
         
         try{
@@ -51,24 +47,25 @@ public class AC1_HGB {
             System.out.println(e.getMessage());
         }
         
-        int opcio;
-        boolean valor;
-        int id;
-        ResultSet resSet;
-        Statement stmt;
-        
-            menu();
-            opcio = scan.nextInt();
-                    
-                    switch(opcio){
-                        //inserim els alumnes per teclat
-                        case 1:
-                            
+        try {
+            
+        System.out.println("Tria una opcio, per poder introduir un alumne"
+                + " has d'introduir una poblacio amb un codipostal.");
+        System.out.println("1. Inserir registre (alumne)");
+        System.out.println("2. Modificar registre");
+        System.out.println("3. Eliminar registre");
+        System.out.println("4. Ensenyar registres");
+        System.out.println("5. Inserir registre (poblacio)");
+        System.out.println("6. Sortir");
+        opcio = scan.nextInt();
+        while(opcio != 6){
+            if(opcio == 1){
+               
                         System.out.println("Introdueix el nom de l'alumne");
                         String nom = scan.next();
                         System.out.println("Introdueix el DNI");
                         String dni = scan.next();
-                        System.out.println("Introdueix la data de naixement (en String)");
+                        System.out.println("Introdueix la data de naixement (any-mes-dia)");
                         String datanaixement = scan.next();
                         System.out.println("Introdueix la adreça");
                         String adreça = scan.next();
@@ -77,10 +74,10 @@ public class AC1_HGB {
                         System.out.println("Introdueix codiPostal");
                         int codipostal = scan.nextInt();
                         
-                        
-                        //fem els inserts a la base de dades
-                      stmt = (Statement) conn.createStatement();
-                    stmt.executeUpdate("INSERT INTO alumnes(nom, dni, datanaixement, adreça, sexe, codipostal)"
+                        try{
+                            
+                            stmt = (Statement) conn.createStatement();
+                            stmt.execute("INSERT INTO alumnes(nom, dni, datanaixement, adreça, sexe, codipostal)"
                             + "VALUES ('" 
                             + nom
                             + "', '"
@@ -94,114 +91,150 @@ public class AC1_HGB {
                             + "', '"
                             + codipostal
                             + "')");
-                    
-                    System.out.println("alumne introduit");
-                    
-                    break;
-                           //modificar Alumnes 
-                        case 2:
-                            
-                          System.out.println("Introdueix el DNI de l'alumne a modificar");
-                            dni = scan.next();
-                            boolean modificar = true;
-                            //triem el dni per buscar l'alumne
-                            stmt = (Statement) conn.createStatement();
-                            resSet = stmt.executeQuery("SELECT * FROM alumnes WHERE dni = '" + dni + "'");
-                            
-                            valor =resSet.next();
-                            
-                            //si falla l'alunme
-                            if (valor == false) {
-                                System.out.println("L'alumne introduit no existeix");
-                            }else{
-                                while (modificar) {
-                                    resSet = stmt.executeQuery("SELECT * FROM alumnes WHERE dni = '" + dni + "'");
+                            System.out.println("alumne introduit");
+                        } catch(Exception e) {
+                            System.out.println("Afegeix poblacio i codi postal");
+                        }
+            } else if (opcio == 2){
+                
+                System.out.println("Tria una taula a modificar");
+		String mTaula = scan.next();
+                System.out.println("tria una columna a modificar");
+		String triaColumna = scan.next();
+		System.out.println("Afegeix el valor");
+		String vColumna = scan.next();
+                                if(mTaula.equalsIgnoreCase("alumnes")){
+                                    
+                                    System.out.println("Modificar per DNI");
+                                    String vAnterior = scan.next();
+                                    
+                                    selectStmt = conn.createStatement();
                                 
-                            System.out.println("Nom---DNI---Data Naixement---Adreça---Sexe---Codi Postal");
-                            while (resSet.next())
-                                System.out.println(resSet.getString(1) + " " + resSet.getString(2)+ " " + 
-                                        resSet.getString(3) + " " + resSet.getString(4) + " " + 
-                                        resSet.getString(5) + " " + resSet.getInt(6));
-                            
-                            //seleccionem el camp a modificar
-                            System.out.println("Escriu el camp a modificar: ");
-                            System.out.println("Nom---DNI---Data Naixement---Adreça---Sexe---Codi Postal");
-                            String campM = scan.next().toLowerCase();
-                            System.out.println("Introdueix el nou camp");
-                            
-                            if (campM.equals("campo")) {
-                                int codipostUpdate = scan.nextInt();
-                                stmt.executeUpdate("UPDATE alumnes set " + campM + 
-                                        "= '" + valor + "'WHERE dni = '" + 
-                                        dni + "'");
-                            }else{
-                                String valor2 = scan.next();
-                                stmt.executeUpdate("UPDATE alumnes set " + campM + 
-                                        "= '" + valor + "'WHERE dni = '" + 
-                                        dni + "'");
-                            }
-                            
-                                    System.out.println("Vols modificar mes camps?");
-                                    System.out.println("Si o no?");
-                                    String altraM = scan.next();
-                                    if (altraM.equalsIgnoreCase("no")) {
-                                        modificar = false;
-                                    }
-                            
-                            }       
-                    }
-                        break;
-                            
-                            //eliminar alumne
-                            
-                        case 3:
-                            
-                            System.out.println("Introdueix el DNI del alumne que vols eliminar");
-                    dni = scan.next();
-                    
-                    stmt = (Statement) conn.createStatement();
-                    
-                    resSet = stmt.executeQuery("SELECT * FROM alumnes WHERE dni = '" + dni
-                                    + "'");
-                    valor = resSet.next();
-                    
-                    if (valor == false) {
-                        System.out.println("Alumne no existeix");
-                    }else{
-                        stmt = (Statement) conn.createStatement();
-                        stmt.executeUpdate("DELETE FROM alumnes WHERE dni = '" + dni
-                                        + "'");
-                        
-                        System.out.println("Alumne eliminat correctament");
-                    }
-                    
-                    break;
-                            
-                    //ensenyar l'alumne
-                            
-                        case 4:
-                            
-                            stmt = (Statement) conn.createStatement();
-                            resSet = stmt.executeQuery("SELECT * FROM alumnes");
-                            System.out.println("Nom---DNI---Data Naixement---Adreça---Sexe---Codi Postal");
-                            while (resSet.next())
+                                    PreparedStatement pps = conn.prepareStatement("UPDATE " + mTaula + " SET " + triaColumna + " = '" + vColumna + "' WHERE dni = '" + vAnterior +"' ");
+                                    pps.executeUpdate();
+                                    
+                                } else {
+                                    System.out.println("Modificar per codi Postal");
+                                    int vAnterior = scan.nextInt();
+                                    
+                                    selectStmt = conn.createStatement();
                                 
-                                System.out.println(resSet.getString(1) + " " + resSet.getString(2)+ " " + 
-                                        resSet.getString(3) + " " + resSet.getString(4) + " " + 
-                                        resSet.getString(5) + " " + resSet.getInt(6));
-                            break;
+                                    System.out.println("Esats segur? Alguns alumnes poden ser modificats 1. SI / 2. NO");
+                                    int cas = scan.nextInt();
+                                        if(cas == 1){
+                                            
+                                            PreparedStatement ps = conn.prepareStatement("UPDATE " + mTaula + " SET " + triaColumna + " = '" + vColumna + "' WHERE codipostal = " + vAnterior +" ");
+                                            ps.executeUpdate();
+                                            
+                                        } else {
+                                            
+                                            System.out.println("Operacio canccelada");
+                                        }
+                                    
+                                }
+             } else if (opcio == 3) {
+                  int contar = 0;
+                  ResultSet rs = null;
+                  ResultSet rs2 = null;
                             
-                    //sortir del programa i tancar la conexio
-                        case 5:
-                            System.out.println("Conexio tancada");
-                            conn.close();
-                            programa = false;
-                            
-                        default:
+				System.out.println("Tria una taula");
+				String triaTaula = scan.next();
+				System.out.println("Tria una columna");
+				String eColumna = scan.next();
+				System.out.println("1. VARCHAR | 2. INT");
+				int eValor = scan.nextInt();
+                                
+                                
+
+				if(eValor == 1){
+                                    
+					System.out.println("Afegeix el valor");
+					String vColumna = scan.next();
+                                        
+                                              if(triaTaula.equalsIgnoreCase("alumnes")){
+
+                                                  PreparedStatement ps = conn.prepareStatement("DELETE FROM " + triaTaula + " WHERE " + eColumna + " = '" + vColumna + "'");
+                                                  ps.executeUpdate();
+
+                                              } else {
+
+                                              System.out.println("No pots eliminar una columna per el nom. ");
+                                              
+                                              }  
+                                	
+				} else if (eValor == 2){
+                                        System.out.println("Afegeix el valor");
+					int vColumna = scan.nextInt();
+                                        
+                                        if(triaTaula.equalsIgnoreCase("poblacio")){
+                                            
+                                            try{
+                                            selectStmt = conn.createStatement();
+                                            
+                                            rs = selectStmt.executeQuery("SELECT * FROM alumnes WHERE " + eColumna + " = '" + vColumna + "'");
+                                            while(rs.next()){
+                                                contar++;
+                                            }
+                                            
+                                            System.out.println("Es borraran " + contar + " alumnes vols continuar 1.SI / 2.NO");
+                                            int cas = scan.nextInt();
+                                            if(cas == 1){
+                                            
+                                                PreparedStatement ps = conn.prepareStatement("DELETE FROM " + triaTaula + " WHERE " + eColumna + " = " + vColumna +" ");
+                                                ps.executeUpdate();
+                                            
+                                            } else {
+                                            
+                                            System.out.println("Operacio cancelada");
+                                        }
+                                            }catch(SQLException ex){
+                                            }
+                                        
+                                        }
+                                }
+             } else if (opcio == 4){
+                  ResultSet rs = null;
+                 stmt = (Statement) conn.createStatement();
+                            rs = stmt.executeQuery("SELECT * FROM alumnes");
+                            System.out.println("Nom  DNI   Data Naixement   Adreça   Sexe   Codi Postal");
+                            while (rs.next())
+                                
+                                System.out.println(rs.getString(1) + " " + rs.getString(2)+ " " + 
+                                        rs.getString(3) + " " + rs.getString(4) + " " + 
+                                        rs.getString(5) + " " + rs.getInt(6));
                             break;
-                    }
+             } else if (opcio == 5){
+                 System.out.println("Afegeix una poblacio");
+				String nPoblacio = scan.next();
+				System.out.println("Afegeix un codi postal");
+				int cpPoblacio = scan.nextInt();
+                                
+                                try{
+                                    stmt = conn.createStatement();
+                                    stmt.execute("INSERT INTO poblacio VALUES (" + cpPoblacio + ",'" + nPoblacio + "')");
+                                } catch (Exception e) {
+                                    System.out.println("No repeteixis codi postal");
+                                }
+             }
+        }
+        } catch (Exception e) {
+			e.printStackTrace();
+        } finally {
+            try{
+                System.out.println("Conexio tancada");
+                conn.close();
+            }catch(Exception e){
+                System.out.println("No hem tancat la conexio");
+                }
+                            
+        } 
+                    
+                            
+                      
+                    
 }
 }
+
     
    
         
