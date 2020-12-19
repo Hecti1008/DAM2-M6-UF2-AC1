@@ -32,7 +32,6 @@ public class AC1_HGB {
        Scanner scan = new Scanner(System.in);
        
        int opcio;
-        boolean valor;
         Statement selectStmt = null;
         Statement stmt;
         
@@ -48,7 +47,8 @@ public class AC1_HGB {
         }
         
         try {
-            
+         
+            //imprimim el menu per seleccionar la opcio
         System.out.println("Tria una opcio, per poder introduir un alumne"
                 + " has d'introduir una poblacio amb un codipostal.");
         System.out.println("1. Inserir registre (alumne)");
@@ -60,7 +60,8 @@ public class AC1_HGB {
         opcio = scan.nextInt();
         while(opcio != 6){
             if(opcio == 1){
-               
+                        
+                        //introduim les dades del alumne
                         System.out.println("Introdueix el nom de l'alumne");
                         String nom = scan.next();
                         System.out.println("Introdueix el DNI");
@@ -75,7 +76,7 @@ public class AC1_HGB {
                         int codipostal = scan.nextInt();
                         
                         try{
-                            
+                            //pasem les dades a la base de dades
                             stmt = (Statement) conn.createStatement();
                             stmt.execute("INSERT INTO alumnes(nom, dni, datanaixement, adreça, sexe, codipostal)"
                             + "VALUES ('" 
@@ -96,13 +97,14 @@ public class AC1_HGB {
                             System.out.println("Afegeix poblacio i codi postal");
                         }
             } else if (opcio == 2){
-                
+                //seleccionem el camp i l'alumne a modificar segons el dni
                 System.out.println("Tria una taula a modificar");
 		String mTaula = scan.next();
                 System.out.println("tria una columna a modificar");
 		String triaColumna = scan.next();
 		System.out.println("Afegeix el valor");
 		String vColumna = scan.next();
+                                //modifiquem el camp alumnes amb un UPdate
                                 if(mTaula.equalsIgnoreCase("alumnes")){
                                     
                                     System.out.println("Modificar per DNI");
@@ -113,6 +115,7 @@ public class AC1_HGB {
                                     PreparedStatement pps = conn.prepareStatement("UPDATE " + mTaula + " SET " + triaColumna + " = '" + vColumna + "' WHERE dni = '" + vAnterior +"' ");
                                     pps.executeUpdate();
                                     
+                                    //sino modifiquem el camp poblacio
                                 } else {
                                     System.out.println("Modificar per codi Postal");
                                     int vAnterior = scan.nextInt();
@@ -135,8 +138,8 @@ public class AC1_HGB {
              } else if (opcio == 3) {
                   int contar = 0;
                   ResultSet rs = null;
-                  ResultSet rs2 = null;
-                            
+   
+                            //demanem la taula, columna i el valor a eliminar
 				System.out.println("Tria una taula");
 				String triaTaula = scan.next();
 				System.out.println("Tria una columna");
@@ -192,6 +195,7 @@ public class AC1_HGB {
                                         
                                         }
                                 }
+                                //ensenyem tots els registres dels alumnes
              } else if (opcio == 4){
                   ResultSet rs = null;
                  stmt = (Statement) conn.createStatement();
@@ -203,6 +207,7 @@ public class AC1_HGB {
                                         rs.getString(3) + " " + rs.getString(4) + " " + 
                                         rs.getString(5) + " " + rs.getInt(6));
                             break;
+                            //afegim poblacio
              } else if (opcio == 5){
                  System.out.println("Afegeix una poblacio");
 				String nPoblacio = scan.next();
@@ -220,6 +225,7 @@ public class AC1_HGB {
         } catch (Exception e) {
 			e.printStackTrace();
         } finally {
+            //finalment tanquem la conexio al servidor
             try{
                 System.out.println("Conexio tancada");
                 conn.close();
